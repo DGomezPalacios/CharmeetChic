@@ -14,10 +14,9 @@ import lombok.Data;
 public class Usuario {
     @Id //este artributo sera la PK
     @GeneratedValue(strategy =GenerationType.IDENTITY) /*autoincremental*/
-    private long id;
 
+    private Long id;
     private String nombre;
-
     private String apellido;
 
     @Column (unique =true) // estos son unicos en la bbdd

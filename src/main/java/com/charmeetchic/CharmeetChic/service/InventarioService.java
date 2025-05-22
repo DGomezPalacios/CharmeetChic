@@ -24,7 +24,7 @@ public class InventarioService {
 
         if (inventario.isAlerta()) {
             Notificaciones noti = new Notificaciones();
-            noti.setDestinatario("admin@joyeria.com"); // podría ser dinámico
+            noti.setDestinatario("admin@charmeetchic.com"); // podría ser dinámico
             noti.setMensaje("ALERTA: El producto con ID " + inventario.getProductoId()
                     + " tiene stock bajo (" + inventario.getStock() + " unidades)");
             noti.setTipo("EMAIL");

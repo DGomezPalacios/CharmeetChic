@@ -23,6 +23,12 @@ public class InventarioController {
         return inventarioService.guardar(inventario);
     }
 
+    @PutMapping("/{id}")
+    public Inventario actualizarInventario(@PathVariable Long id, @RequestBody Inventario inventario) {
+        inventario.setId(id); // Asigna el ID recibido en la URL
+        return inventarioService.guardar(inventario);
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         inventarioService.eliminar(id);

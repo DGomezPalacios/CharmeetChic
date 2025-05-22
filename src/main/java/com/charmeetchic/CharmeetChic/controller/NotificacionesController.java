@@ -23,6 +23,12 @@ public class NotificacionesController {
         return notificacionesService.enviarNotificacion(notificacion);
     }
 
+    @PutMapping("/{id}")
+    public Notificaciones actualizar(@PathVariable Long id, @RequestBody Notificaciones notificacion) {
+        notificacion.setId(id); // Asegura que se actualice el objeto correcto
+        return notificacionesService.enviarNotificacion(notificacion);
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         notificacionesService.eliminar(id);

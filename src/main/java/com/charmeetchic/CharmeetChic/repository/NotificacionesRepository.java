@@ -1,5 +1,6 @@
 package com.charmeetchic.CharmeetChic.repository;
 
-public class NotificacionesRepository {
+import com.charmeetchic.CharmeetChic.model.Notificaciones;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-}
+public interface NotificacionesRepository extends JpaRepository<Notificaciones, Long> {}

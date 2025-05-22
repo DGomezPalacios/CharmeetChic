@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 public class Inventario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int productoId;
+    private Long id;
+    private Long productoId;
     private int stock;
     private int stockMinimo;
     private boolean alerta;
@@ -17,20 +17,22 @@ public class Inventario {
     }
 
     // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getProductoId() { return productoId; }
-    public void setProductoId(int productoId) { this.productoId = productoId; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Long getProductoId() { return productoId; }
+    public void setProductoId(Long productoId) { this.productoId = productoId; }
     public int getStock() { return stock; }
     public void setStock(int stock) {
         this.stock = stock;
         verificarAlerta();
     }
+
     public int getStockMinimo() { return stockMinimo; }
     public void setStockMinimo(int stockMinimo) {
         this.stockMinimo = stockMinimo;
         verificarAlerta();
     }
+
     public boolean isAlerta() { return alerta; }
     public void setAlerta(boolean alerta) { this.alerta = alerta; }
 }

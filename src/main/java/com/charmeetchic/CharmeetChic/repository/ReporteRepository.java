@@ -1,5 +1,7 @@
 package com.charmeetchic.CharmeetChic.repository;
 
-public class ReporteRepository {
+import com.charmeetchic.CharmeetChic.model.Reporte;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface ReporteRepository extends JpaRepository<Reporte, Long> {
 }

@@ -1,5 +1,6 @@
 package com.charmeetchic.CharmeetChic.repository;
 
-public class InventarioRepository {
+import com.charmeetchic.CharmeetChic.model.Inventario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-}
+public interface InventarioRepository extends JpaRepository<Inventario, Long> {}

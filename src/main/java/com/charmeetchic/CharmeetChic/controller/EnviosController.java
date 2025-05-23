@@ -7,29 +7,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Marca esta clase como un controlador REST
-@RequestMapping("/api/envios") // Define la URL base para todas las rutas de este controlador
+@RestController 
+@RequestMapping("/api/envios") 
 public class EnviosController {
-    @Autowired // Inyecta el servicio de envíos
+    @Autowired 
     private EnviosService enviosService;
 
-    @GetMapping // Maneja solicitudes GET en "/api/envios"
+    @GetMapping 
     public List<Envios> listar() {
-        return enviosService.obtenerTodos(); // Devuelve la lista de todos los envíos
+        return enviosService.obtenerTodos(); 
     }
 
-    @PostMapping // Maneja solicitudes POST en "/api/envios"
-    public Envios crear(@RequestBody Envios envio) { // Recibe un objeto Envios desde el cuerpo de la petición
-        return enviosService.guardar(envio); // Guarda el nuevo envío
+    @PostMapping 
+    public Envios crear(@RequestBody Envios envio) { 
+        return enviosService.guardar(envio); 
     }
 
-    @PutMapping("/{id}/estado") // Maneja solicitudes PUT para actualizar el estado del envío con el ID especificado
-    public Envios actualizarEstado(@PathVariable Long id, @RequestBody String nuevoEstado) { // Recibe el nuevo estado en el cuerpo
-        return enviosService.actualizarEstado(id, nuevoEstado); // Llama al servicio para actualizar el estado
+    @PutMapping("/{id}/estado") 
+    public Envios actualizarEstado(@PathVariable Long id, @RequestBody String nuevoEstado) { 
+        return enviosService.actualizarEstado(id, nuevoEstado); 
     }
 
-    @DeleteMapping("/{id}") // Maneja solicitudes DELETE para eliminar un envío por ID
+    @DeleteMapping("/{id}") 
     public void eliminar(@PathVariable Long id) {
-        enviosService.eliminar(id); // Elimina el envío
+        enviosService.eliminar(id); 
     }
 }

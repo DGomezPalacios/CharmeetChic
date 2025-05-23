@@ -18,14 +18,13 @@ public class Pago {
 
     private Long id;
 
-    private Long pedidoId;       // ID del pedido al que pertenece el pago
+    private Long pedidoId;       
 
-    private Double monto;        // Monto total del pago
+    private Double monto;        
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaPago;      // Fecha y hora del pago
-
-    private String metodoPago;   // Método de pago (ej: "Transferencia", "Tarjeta", etc.)
+    private Date fechaPago;      
+    private String metodoPago;   
 
     private String estado;  
 

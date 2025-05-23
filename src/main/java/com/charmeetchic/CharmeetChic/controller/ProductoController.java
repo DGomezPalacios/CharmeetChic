@@ -18,39 +18,38 @@ import com.charmeetchic.CharmeetChic.service.ProductoService;
 
 import lombok.AllArgsConstructor;
 
-@RestController // Define este controlador como REST
+@RestController 
 @RequestMapping("/api/productos") // Ruta base para todos los endpoints
-@AllArgsConstructor // Inyección de dependencias mediante constructor automático
+@AllArgsConstructor 
 public class ProductoController {
 
     private final ProductoService productoService;
-
-    // Endpoint para crear un nuevo producto (POST)
+    //nvo producto
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
         return ResponseEntity.ok(productoService.crearProducto(producto));
     }
 
-    // Endpoint para modificar un producto existente (PUT)
+    //act producto
     @PutMapping
     public ResponseEntity<Producto> modificarProducto(@RequestBody Producto producto) {
         return ResponseEntity.ok(productoService.modificarProducto(producto));
     }
 
-    // Endpoint para eliminar un producto por ID (DELETE)
+    //eliminar prod
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         productoService.eliminarProducto(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Endpoint para buscar productos por nombre parcial (GET con query param)
+    //buscar por nombre
     @GetMapping("/buscar")
     public ResponseEntity<List<Producto>> buscarPorNombre(@RequestParam String nombre) {
         return ResponseEntity.ok(productoService.buscarPorNombre(nombre));
     }
 
-    // Endpoint para buscar un producto por ID (GET con path variable)
+    // buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<Producto> buscarPorId(@PathVariable Long id) {
         return productoService.buscarPorId(id)
@@ -58,7 +57,7 @@ public class ProductoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Endpoint para listar todos los productos (GET)
+    //listar productos
     @GetMapping
     public ResponseEntity<List<Producto>> listarTodos() {
         return ResponseEntity.ok(productoService.listarTodos());

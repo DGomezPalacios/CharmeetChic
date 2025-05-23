@@ -2,34 +2,38 @@ package com.charmeetchic.CharmeetChic.controller;
 
 import com.charmeetchic.CharmeetChic.model.Envios;
 import com.charmeetchic.CharmeetChic.service.EnviosService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Marca esta clase como un controlador REST
-@RequestMapping("/api/envios") // Define la URL base para todas las rutas de este controlador
+@RestController
+@RequestMapping("/api/envios")
+@AllArgsConstructor
 public class EnviosController {
-    @Autowired // Inyecta el servicio de envíos
-    private EnviosService enviosService;
 
-    @GetMapping // Maneja solicitudes GET en "/api/envios"
-    public List<Envios> listar() {
-        return enviosService.obtenerTodos(); // Devuelve la lista de todos los envíos
+    private final EnviosService enviosService;
+
+    @GetMapping
+    public ResponseEntity<List<Envios>> listarEnvios() {
+        return ResponseEntity.ok(enviosService.obtenerTodos());
     }
 
-    @PostMapping // Maneja solicitudes POST en "/api/envios"
-    public Envios crear(@RequestBody Envios envio) { // Recibe un objeto Envios desde el cuerpo de la petición
-        return enviosService.guardar(envio); // Guarda el nuevo envío
+    @PostMapping
+    public ResponseEntity<Envios> crearEnvio(@RequestBody Envios envio) {
+        return ResponseEntity.ok(enviosService.guardar(envio));
     }
 
-    @PutMapping("/{id}/estado") // Maneja solicitudes PUT para actualizar el estado del envío con el ID especificado
-    public Envios actualizarEstado(@PathVariable Long id, @RequestBody String nuevoEstado) { // Recibe el nuevo estado en el cuerpo
-        return enviosService.actualizarEstado(id, nuevoEstado); // Llama al servicio para actualizar el estado
+    @PutMapping("/{id}")
+    public ResponseEntity<Envios> actualizarEnvio(@PathVariable Long id, @RequestBody Envios envio) {
+        envio.setId(id);
+        return ResponseEntity.ok(enviosService.guardar(envio));
     }
 
-    @DeleteMapping("/{id}") // Maneja solicitudes DELETE para eliminar un envío por ID
-    public void eliminar(@PathVariable Long id) {
-        enviosService.eliminar(id); // Elimina el envío
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarEnvio(@PathVariable Long id) {
+        enviosService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

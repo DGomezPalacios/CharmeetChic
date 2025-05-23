@@ -2,34 +2,38 @@ package com.charmeetchic.CharmeetChic.controller;
 
 import com.charmeetchic.CharmeetChic.model.Notificaciones;
 import com.charmeetchic.CharmeetChic.service.NotificacionesService;
-import org.springframework.beans.factory.annotation.Autowired; // Inyección de dependencias
-import org.springframework.web.bind.annotation.*; // Anotaciones REST de Spring
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List; // Manejo de listas
+import java.util.List;
 
-@RestController // Indica que esta clase es un controlador REST
-@RequestMapping("/api/notificaciones") // URL base para este microservicio
+@RestController
+@RequestMapping("/api/notificaciones")
+@AllArgsConstructor
 public class NotificacionesController {
-    @Autowired // Inyecta el servicio de notificaciones
-    private NotificacionesService notificacionesService;
 
-    @GetMapping // Maneja solicitudes GET para listar notificaciones
-    public List<Notificaciones> listarNotificaciones() {
-        return notificacionesService.obtenerTodas();
+    private final NotificacionesService notificacionesService;
+
+    @GetMapping
+    public ResponseEntity<List<Notificaciones>> listarNotificaciones() {
+        return ResponseEntity.ok(notificacionesService.obtenerTodas());
     }
 
-    @PostMapping // Maneja solicitudes POST para enviar una nueva notificación
-    public Notificaciones enviar(@RequestBody Notificaciones notificacion) {
-        return notificacionesService.enviarNotificacion(notificacion);
+    @PostMapping
+    public ResponseEntity<Notificaciones> crearNotificacion(@RequestBody Notificaciones notificacion) {
+        return ResponseEntity.ok(notificacionesService.guardar(notificacion));
     }
 
-    @PutMapping("/{id}") // Maneja solicitudes PUT para actualizar una notificación por ID
-    public Notificaciones actualizar(@PathVariable Long id, @RequestBody Notificaciones notificacion) {
-        return notificacionesService.actualizar(id, notificacion);
+    @PutMapping("/{id}")
+    public ResponseEntity<Notificaciones> actualizarNotificacion(@PathVariable Long id, @RequestBody Notificaciones notificacion) {
+        notificacion.setId(id);
+        return ResponseEntity.ok(notificacionesService.guardar(notificacion));
     }
 
-    @DeleteMapping("/{id}") // Maneja solicitudes DELETE para eliminar una notificación
-    public void eliminar(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarNotificacion(@PathVariable Long id) {
         notificacionesService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

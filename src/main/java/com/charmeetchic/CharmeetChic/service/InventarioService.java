@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,5 +25,10 @@ public class InventarioService {
 
     public void eliminar(Long id) {
         inventarioRepository.deleteById(id);
+    }
+    
+    // Buscar producto en inventario
+    public Optional<Inventario> buscarPorProductoId(Long productoId) {
+        return inventarioRepository.findByProductoId(productoId);
     }
 }

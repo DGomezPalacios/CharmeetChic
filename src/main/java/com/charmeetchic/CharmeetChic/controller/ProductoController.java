@@ -18,7 +18,7 @@ import com.charmeetchic.CharmeetChic.service.ProductoService;
 
 import lombok.AllArgsConstructor;
 
-@RestController // Define este controlador como REST
+@RestController 
 @RequestMapping("/api/productos") // Ruta base para todos los endpoints
 @AllArgsConstructor // Inyección de dependencias mediante constructor automático
 public class ProductoController {

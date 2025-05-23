@@ -6,38 +6,34 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Data // Lombok genera automáticamente getters, setters, toString, equals y hashCode
+@Data 
 public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // ID de la compra
+    private Long id; 
 
-    private Long usuarioId; // ID del usuario que realiza la compra
+    private Long usuarioId; 
 
-    private String estado; // Estado de la compra: EN_CARRITO, PAGADO, ENVIADO, etc.
+    private String estado; //en carrito, pagado, enviado
 
-    private Double total; // Monto total de la compra
+    private Double total; 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "compra_id")
-    private List<DetalleCompra> detalles; // Lista de productos y cantidades
-
-    // Subclase embebida para los detalles
+    private List<DetalleCompra> detalles; 
+    
+    // Subclase detalle de compra
     @Entity
     @Data
     public static class DetalleCompra {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id; // ID del detalle
-
-        private Long productoId; // ID del producto
-
-        private int cantidad; // Cantidad comprada del producto
-
-        private Double precioUnitario; // Precio unitario del producto en ese momento
-
+        private Long id;
+        private Long productoId; 
+        private int cantidad; 
+        private Double precioUnitario;
         private Double subtotal; // precioUnitario * cantidad
     }
 }

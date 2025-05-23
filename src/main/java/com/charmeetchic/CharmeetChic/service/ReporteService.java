@@ -30,7 +30,7 @@ public class ReporteService {
         reporteRepository.deleteById(id);
     }
 
-    // Generar reporte de inventario bajo
+    // Generar reporte de inventario
     public Reporte generarReporteInventarioBajo(List<Inventario> inventarioBajo) {
         StringBuilder contenido = new StringBuilder("Productos con stock bajo:\n");
 

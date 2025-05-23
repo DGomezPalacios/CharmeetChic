@@ -2,42 +2,26 @@ package com.charmeetchic.CharmeetChic.service;
 
 import com.charmeetchic.CharmeetChic.model.Notificaciones;
 import com.charmeetchic.CharmeetChic.repository.NotificacionesRepository;
-import org.springframework.beans.factory.annotation.Autowired; // Inyección de dependencias
-import org.springframework.stereotype.Service; // Marca la clase como un servicio
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List; // Para manejar listas
+import java.util.List;
 
-@Service // Marca esta clase como un componente de servicio
+@Service
+@AllArgsConstructor
 public class NotificacionesService {
-    @Autowired // Inyecta el repositorio de notificaciones
-    private NotificacionesRepository notificacionesRepository;
 
-    // Devuelve todas las notificaciones registradas
+    private final NotificacionesRepository notificacionesRepository;
+
     public List<Notificaciones> obtenerTodas() {
         return notificacionesRepository.findAll();
     }
 
-    // Guarda y simula el envío de una notificación
-    public Notificaciones enviarNotificacion(Notificaciones notificacion) {
-        notificacion.setEnviado(true); // Marca como enviada
-        return notificacionesRepository.save(notificacion); // Guarda en base de datos
+    public Notificaciones guardar(Notificaciones notificacion) {
+        return notificacionesRepository.save(notificacion);
     }
 
-    // Elimina una notificación por su ID
     public void eliminar(Long id) {
         notificacionesRepository.deleteById(id);
-    }
-
-    // Actualiza una notificación existente
-    public Notificaciones actualizar(Long id, Notificaciones nuevaNotificacion) {
-        Notificaciones existente = notificacionesRepository.findById(id).orElseThrow(); // Busca la notificación
-
-        // Actualiza los campos necesarios
-        existente.setDestinatario(nuevaNotificacion.getDestinatario());
-        existente.setMensaje(nuevaNotificacion.getMensaje());
-        existente.setTipo(nuevaNotificacion.getTipo());
-        existente.setEnviado(nuevaNotificacion.isEnviado());
-
-        return notificacionesRepository.save(existente); // Guarda cambios
     }
 }

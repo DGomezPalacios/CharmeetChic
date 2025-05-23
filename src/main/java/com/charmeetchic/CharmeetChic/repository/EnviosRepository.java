@@ -1,5 +1,6 @@
 package com.charmeetchic.CharmeetChic.repository;
 
-public class EnviosRepository {
+import com.charmeetchic.CharmeetChic.model.Envios;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-}
+public interface EnviosRepository extends JpaRepository<Envios, Long> {}

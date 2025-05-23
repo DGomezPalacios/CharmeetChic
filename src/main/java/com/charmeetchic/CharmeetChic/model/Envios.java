@@ -1,11 +1,11 @@
 package com.charmeetchic.CharmeetChic.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; // Importa las anotaciones necesarias para JPA
 
-@Entity
+@Entity // Indica que esta clase es una entidad de base de datos
 public class Envios {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // La clave primaria se genera automáticamente
     private Long id;
     private Long ordenId;
     private String direccion;

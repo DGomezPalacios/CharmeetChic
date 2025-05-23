@@ -1,19 +1,22 @@
 package com.charmeetchic.CharmeetChic.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; // Importa las anotaciones de JPA para persistencia
 
-@Entity
+@Entity // Indica que esta clase representa una tabla en la base de datos
 public class Notificaciones {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id // Define el campo como clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática del ID
+    private Long id; // Identificador único de la notificación
 
-    private String destinatario;
-    private String mensaje;
-    private String tipo; // EMAIL, SMS, PUSH, etc.
-    private boolean enviado;
+    private String destinatario; // Email u otro identificador del destinatario
 
-    // Getters y Setters
+    private String mensaje; // Contenido de la notificación
+
+    private String tipo; // Tipo de notificación (ej: EMAIL, SMS)
+
+    private boolean enviado; // Indica si la notificación ha sido enviada
+
+    // Getters y setters para acceder y modificar los campos
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

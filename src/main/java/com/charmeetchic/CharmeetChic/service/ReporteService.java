@@ -1,48 +1,39 @@
 package com.charmeetchic.CharmeetChic.service;
 
-// Importamos las clases
 import com.charmeetchic.CharmeetChic.model.Inventario;
 import com.charmeetchic.CharmeetChic.model.Reporte;
 import com.charmeetchic.CharmeetChic.repository.ReporteRepository;
-
-// Importamos anotaciones de Spring
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List; // Importamos List para manejar listas de objetos
+import java.time.LocalDate;
+import java.util.List;
 
-// Indicamos que esta clase es un servicio de Spring
 @Service
+@AllArgsConstructor
 public class ReporteService {
 
-    // Inyectamos el repositorio de Reporte para acceder a la base de datos
-    @Autowired
-    private ReporteRepository reporteRepository;
+    private final ReporteRepository reporteRepository;
 
-    // ==================== MÉTODOS CRUD ====================
-
-    // Método para obtener todos los reportes guardados
+    // Obtener todos los reportes
     public List<Reporte> obtenerTodos() {
-        return reporteRepository.findAll(); // Devuelve todos los reportes almacenados
+        return reporteRepository.findAll();
     }
 
-    // Método para guardar (crear o actualizar) un reporte
+    // Guardar o actualizar un reporte
     public Reporte guardar(Reporte reporte) {
-        return reporteRepository.save(reporte); // Guarda el objeto reporte en la base de datos
+        return reporteRepository.save(reporte);
     }
 
-    // Método para eliminar un reporte por su ID
+    // Eliminar un reporte por ID
     public void eliminar(Long id) {
-        reporteRepository.deleteById(id); // Elimina el reporte con el ID especificado
+        reporteRepository.deleteById(id);
     }
 
-    // Método para generar un reporte específico de inventario bajo
+    // Generar reporte de inventario bajo
     public Reporte generarReporteInventarioBajo(List<Inventario> inventarioBajo) {
-
-        // Creamos el contenido del reporte en formato de texto
         StringBuilder contenido = new StringBuilder("Productos con stock bajo:\n");
 
-        // Recorremos la lista de inventario bajo y añadimos la información al contenido
         for (Inventario i : inventarioBajo) {
             contenido.append("Producto ID: ")
                      .append(i.getProductoId())
@@ -51,14 +42,13 @@ public class ReporteService {
                      .append("\n");
         }
 
-        // Creamos un nuevo objeto Reporte y seteamos sus campos
         Reporte reporte = new Reporte();
-        reporte.setTipo("inventario_bajo"); // Tipo de reporte
-        reporte.setContenido(contenido.toString()); // Contenido generado
-        reporte.setGeneradoPor("sistema"); // Generador del reporte
-        reporte.setFecha(java.time.LocalDate.now().toString()); // Fecha del día actual
+        reporte.setTipo("inventario_bajo");
+        reporte.setContenido(contenido.toString());
+        reporte.setGeneradoPor("sistema");
+        reporte.setFecha(LocalDate.now().toString());
 
-        // Guardamos el reporte en la base de datos y lo devolvemos
         return reporteRepository.save(reporte);
     }
 }
+
